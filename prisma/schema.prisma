@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+model User {
+    id            String  @id @default(uuid())
+    code          Int     @default(autoincrement())
+    username      String
+    password      String
+    email         String   @unique
+    emailVerified DateTime?
+    emailVerificationCode String?
+    image         String?
+    role          Role     @default(USER)
+    balance       Int      @default(0)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    tickets   Ticket[]
+    events    Event[]
+
+    @@index([code])
+}
+
+enum Role {
+    ADMIN
+    USER
+}
+
+model Event {
+    id        Int      @id @default(autoincrement())
+    logo      String?
+    name      String
+    date      DateTime?
+    location  String?
+    price     Int?
+    description String?
+    number_of_tickets Int? @default(0)
+    primary_color String? @default("#000000")
+    secondary_color String? @default("#000000")
+    template_id Int? @default(1)
+    userId    String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    posts Post[]
+    tickets Ticket[]
+    @@index([userId])
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())  
+    title     String
+    content   String 
+    eventId   Int
+    createdAt DateTime @default(now())
+
+    event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+    @@index([eventId])
+}
+
+model Ticket {
+    code        Int      @default(autoincrement())
+    ticketName String
+    userId  String
+    eventId Int
+    createdAt DateTime @default(now())
+
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+    @@id([userId, eventId])
+    @@index([userId])
+    @@index([eventId])
+    @@index([code])
+}
