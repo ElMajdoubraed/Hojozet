@@ -55,3 +55,19 @@ a {
 canvas {
   direction: ltr !important;
 }
+
+input[type="file"] {
+  color: transparent !important;
+  cursor: pointer;
+}
+input[type="file"]::-webkit-file-upload-button {
+  display: none !important;
+}
+input:valid {
+  color: black !important;
+}
+
+input[type="color"] {
+  cursor: pointer;
+  overflow: hidden;
+}

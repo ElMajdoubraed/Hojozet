@@ -15,7 +15,7 @@ const StyledFileInput = styled(TextField)`
     cursor: pointer;
   }
   input[type="file"]::-webkit-file-upload-button {
-    display: none;
+    display: none !important;
   }
   input:valid {
     color: black !important;
