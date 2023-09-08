@@ -10,6 +10,7 @@ import msgs from "@/site-settings/site-translations";
 import { MainLayout } from "@/layouts";
 import PropTypes from "prop-types";
 import Script from "next/script";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -20,6 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <>
+      <Head>
+        <title>حجوزات</title>
+      </Head>
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}

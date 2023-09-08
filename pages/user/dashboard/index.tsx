@@ -1,3 +1,9 @@
+//estimated balance
+//total events created (link for it /dashboard/events)
+//total reservations created (link for it /dashboard/tickets)
+// evented created by time (chart line)
+// reservations created by time (chart line)
+// events bu number of tickets (chart pie)
 import { LineChart, PieChart } from "@/components/charts";
 import { PageLayout } from "@/layouts";
 import { Typography } from "@material-ui/core";
@@ -10,11 +16,11 @@ const StyledDivider = styled(Divider)`
   margin-bottom: 65px !important;
 `;
 
-export default function Balance() {
+export default function Dashboard() {
   return (
-    <PageLayout title="title.balance">
+    <PageLayout title="title.dashboard">
       <Head>
-        <title>رصيد الحساب - حجوزات</title>
+        <title> لوحة التحكم - حجوزات</title>
       </Head>
       <Grid container spacing={2}>
         <Grid item xs={12}>

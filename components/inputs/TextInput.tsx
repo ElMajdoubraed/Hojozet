@@ -46,7 +46,7 @@ export default function TextInput({
         variant={variant}
         type={type || "text"}
         value={value}
-        rows={rows || 1}
+        minRows={rows || 1}
         focused={focused}
         multiline={multiline || false}
         fullWidth

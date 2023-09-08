@@ -10,8 +10,76 @@ import {
 } from "@mui/icons-material";
 import Head from "next/head";
 import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
+import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import moment from "@/utils/moment";
+import NotFound from "@/pages/404";
+import { message } from "antd";
 
 export default function Event() {
+  const { user } = useAuth({
+    redirectTo: "/auth/login",
+    redirectIfFound: false,
+  });
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [event, setEvent] = useState({}) as any;
+  React.useEffect(() => {
+    if (!id) return;
+    axios
+      .get(`/api/event/${id}/handle`)
+      .then((res) => {
+        setEvent(res.data?.event);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  const deleteEvent = async () => {
+    if (!id) return;
+    if (!confirm("هل انت متأكد من حذف الفعالية؟")) return;
+    message.loading({ content: "جاري حذف الفعالية", key: "deleteEvent" });
+
+    await axios
+      .delete(`/api/event/${id}`)
+      .then((res) => {
+        message.success("تم حذف الفعالية بنجاح");
+        router.push("/user/dashboard/events");
+      })
+      .catch((err) => {
+        message.error("حدث خطأ اثناء حذف الفعالية");
+        console.log(err);
+      });
+  };
+
+  const handleReservation = async () => {
+    if (!id) return;
+    if (!user) return;
+    if (!confirm("هل انت متأكد من حجز الفعالية؟")) return;
+    message.loading({ content: "جاري الحجز", key: "reservation" });
+    await axios
+      .post(`/api/event/${id}/handle`, {
+        name: user?.name,
+        user_id: user.id,
+        event_id: id,
+      })
+      .then((res) => {
+        message.success("تم حجز الفعالية بنجاح");
+      })
+      .catch((err) => {
+        message.error(
+          "حدث خطأ اثناء حجز الفعالية ربما لا يوجد تذاكر متاحة أو انك قمت بحجزها مسبقاً"
+        );
+        console.log(err);
+      });
+  };
+
+  if (!event) return <NotFound />;
   return (
     <>
       <Head>
@@ -38,76 +106,87 @@ export default function Event() {
                 marginBottom: "1.5rem",
               }}
             />
-            <Typography color="secondary">اسم الفعالية</Typography>
+            <Typography color="secondary">{event?.name}</Typography>
           </Grid>
           <Grid className="mb-5" item xs={12} md={6}>
             <Typography className="mb-5" color="secondary">
-              <Place /> المكان
+              <Place /> {event?.location}
             </Typography>
             <Typography className="mb-5" color="secondary">
-              <EventIcon /> التاريخ
+              <EventIcon /> {event?.date && moment(event?.date).format("LLLL")}
             </Typography>
             <Typography className="mb-5" color="secondary">
-              <MoneyOff /> السعر
+              <MoneyOff /> {event?.price}
             </Typography>
             <Typography className="mb-5" color="secondary">
-              <Description /> الوصف
+              <Description /> {event?.description}
             </Typography>
-            <Link className="mb6" href="/event/1/posts">
+            <Link className="mb6" href={`/event/${id}/posts`}>
               <Typography color="secondary">
                 <PostAdd /> المنشورات
               </Typography>
             </Link>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                marginBottom: "1rem",
-              }}
-            >
-              <Button fullWidth variant="contained" color="secondary">
-                احجز الان
-              </Button>
-            </Box>
-            <Box
-              sx={{
-                marginBottom: "1rem",
-              }}
-            >
-              <Link href="/event/1/addpost">
-                <Button fullWidth variant="contained" color="primary">
-                  اضف منشور
-                </Button>
-              </Link>
-            </Box>
-            <Box
-              sx={{
-                marginBottom: "1rem",
-              }}
-            >
-              <Btn
-                fullWidth
-                variant="outlined"
+            {event?.userId === user?.id ? (
+              <>
+                <Box
+                  sx={{
+                    marginBottom: "1rem",
+                  }}
+                >
+                  <Link href={`/event/${id}/addpost`}>
+                    <Button fullWidth variant="contained" color="primary">
+                      اضف منشور
+                    </Button>
+                  </Link>
+                </Box>
+                <Box
+                  sx={{
+                    marginBottom: "1rem",
+                  }}
+                >
+                  <Btn
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      borderColor: "#ff1744 !important",
+                      color: "#ff1744 !important",
+                    }}
+                    onClick={deleteEvent}
+                    color="error"
+                  >
+                    حذف الفعالية
+                  </Btn>
+                </Box>
+                <Box
+                  sx={{
+                    marginBottom: "1rem",
+                  }}
+                >
+                  <Link href={`/event/${id}/reservations`}>
+                    <Button fullWidth variant="outlined" color="secondary">
+                      عرض الحجوزات
+                    </Button>
+                  </Link>
+                </Box>
+              </>
+            ) : (
+              <Box
                 sx={{
-                  borderColor: "#ff1744 !important",
-                  color: "#ff1744 !important",
+                  marginBottom: "1rem",
                 }}
-                color="error"
               >
-                حذف الفعالية
-              </Btn>
-            </Box>
-            <Box
-              sx={{
-                marginBottom: "1rem",
-              }}
-            >
-              <Link href="/event/1/reservations">
-                <Button fullWidth variant="outlined" color="secondary">
-                  عرض الحجوزات
+                <Button
+                  onClick={handleReservation}
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                >
+                  احجز الان
                 </Button>
-              </Link>
-            </Box>
+              </Box>
+            )}
           </Grid>
         </Grid>
       </PageLayout>

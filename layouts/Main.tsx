@@ -30,7 +30,7 @@ export default function Main({ children, title }: any) {
       <Container maxWidth="lg" component="main" className={classes.container}>
         <div className={classes.content}>{children}</div>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

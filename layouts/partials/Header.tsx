@@ -5,11 +5,11 @@ import {
   Toolbar,
   Typography,
   Button,
-  Avatar,
   Menu,
   MenuItem,
 } from "@material-ui/core";
 import { Box, Container } from "@mui/material";
+import { Widgets } from "@mui/icons-material";
 import Link from "next/link";
 import { FormattedMessage } from "react-intl";
 import { useRouter } from "next/router";
@@ -56,7 +56,7 @@ export default function Header() {
 
 function GuestMenu() {
   return (
-    <Link href="/admin/add" passHref>
+    <Link href="/event/create" passHref>
       <Button id="menu__btn" color="inherit" variant="outlined">
         <FormattedMessage id={"header.add"} />
       </Button>
@@ -88,8 +88,15 @@ function UserMenu(user: any) {
 
   return (
     <div className="left">
-      <button id="menu_btn" onClick={handleMenu}>
-        <Avatar>{currentUser?.name?.charAt(0).toUpperCase()}</Avatar>
+      <button
+        style={{
+          border: "none",
+          background: "none",
+        }}
+        id="menu_btn"
+        onClick={handleMenu}
+      >
+        <Widgets />
       </button>
       <Menu
         id="menu-appbar"
@@ -107,17 +114,27 @@ function UserMenu(user: any) {
         open={Boolean(menu)}
         onClose={handleClose}
       >
-        <Link href="/admin/profile" passHref>
+        <Link href="/user/profile" passHref>
           <MenuItem>{currentUser?.name}</MenuItem>
         </Link>
-        <Link href="/admin/dashboard" passHref>
+        <Link href="/user/dashboard" passHref>
           <MenuItem style={{ color: "black" }}>
             <FormattedMessage id="header.dashboard" />
           </MenuItem>
         </Link>
-        <Link href="/admin/add" passHref>
+        <Link href="/user/dashboard/tickets" passHref>
           <MenuItem style={{ color: "black" }}>
-            <FormattedMessage id={"header.addItem"} />
+            <FormattedMessage id="header.reservations" />
+          </MenuItem>
+        </Link>
+        <Link href="/user/dashboard/events" passHref>
+          <MenuItem style={{ color: "black" }}>
+            <FormattedMessage id="header.events" />
+          </MenuItem>
+        </Link>
+        <Link href="/event/create" passHref>
+          <MenuItem style={{ color: "black" }}>
+            <FormattedMessage id={"header.add"} />
           </MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>

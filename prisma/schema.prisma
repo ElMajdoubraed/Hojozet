@@ -45,8 +45,8 @@ model Event {
     price     Int?
     description String?
     number_of_tickets Int? @default(0)
-    primary_color String? @default("#000000")
-    secondary_color String? @default("#000000")
+    primary_color String? @default("#5cdb95")
+    secondary_color String? @default("#05386B")
     template_id Int? @default(1)
     userId    String
 

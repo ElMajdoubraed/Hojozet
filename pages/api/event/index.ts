@@ -33,9 +33,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             user: { connect: { id: req.user.id } },
           },
         });
-        res.status(200).json({});
+        res.status(200).json({
+          message: "Event created successfully",
+        });
       } catch (error) {
-        res.status(400).json({});
+        res.status(400).json({
+          message: "Something went wrong",
+          error,
+        });
       }
       break;
     case "GET":
