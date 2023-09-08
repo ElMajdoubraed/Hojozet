@@ -14,46 +14,56 @@ import {
 } from "@mui/material";
 import { map } from "lodash";
 import Link from "next/link";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import moment from "@/utils/moment";
+import { message } from "antd";
+import useAuth from "@/hooks/useAuth";
+
 export default function Events() {
-  const events = [
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-    {
-      id: 1,
-      eventName: "user1",
-      date: "2021-10-10",
-    },
-  ];
-  //how much events (onclick send api)
-  function eventsReservations() {}
+  const { user } = useAuth({
+    redirectTo: "/auth/login",
+    redirectIfFound: false,
+  });
+  const [events, setEvents] = useState([]) as any[];
+  const [changed, setChanged] = useState(false);
+  useEffect(() => {
+    axios
+      .get(`/api/event`)
+      .then((res) => {
+        console.log(res.data);
+        setEvents(res.data?.events);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [changed]);
+
+  const handleDelete = (id: number) => {
+    if (!confirm("هل انت متأكد من حذف الفعالية؟")) return;
+    message.loading("جاري حذف الفعالية");
+    axios
+      .delete(`/api/event/${id}`)
+      .then((res) => {
+        message.success("تم حذف الفعالية بنجاح");
+        setChanged(!changed);
+      })
+      .catch((err) => {
+        message.error("حدث خطأ أثناء حذف الفعالية");
+        console.log(err);
+      });
+  };
+  function eventsReservations(id: number) {
+    axios
+      .get(`/api/ticket/${id}/number`)
+      .then((res) => {
+        const count = res.data;
+        alert(`عدد الحجوزات لهذه الفعالية هو ${count}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <>
       <Head>
@@ -80,12 +90,14 @@ export default function Events() {
                 >
                   <TableCell align="right">{index + 1}</TableCell>
                   <TableCell align="right" scope="row">
-                    {event.eventName}
+                    {event?.name}
                   </TableCell>
-                  <TableCell align="right">{event.date}</TableCell>
+                  <TableCell align="right">
+                    {moment(event?.date).format("LLL")}
+                  </TableCell>
                   <TableCell align="right">
                     <Button
-                      onClick={eventsReservations}
+                      onClick={() => eventsReservations(event?.id)}
                       variant="outlined"
                       color="secondary"
                     >
@@ -93,14 +105,19 @@ export default function Events() {
                     </Button>
                   </TableCell>
                   <TableCell align="right">
-                    <a href={`/event/1/reservations`}>
+                    <a href={`/event/${event?.id}/reservations`}>
                       <Button variant="contained" color="primary">
                         رابط الحجوزات
                       </Button>
                     </a>
                   </TableCell>
                   <TableCell align="right">
-                    <IconButton className="space" onClick={() => {}}>
+                    <IconButton
+                      className="space"
+                      onClick={() => {
+                        handleDelete(event.id);
+                      }}
+                    >
                       <DeleteIcon size={20} fill="#ff1744" />
                     </IconButton>
                     <Link className="space" href={`/event/${event.id}`}>
@@ -108,7 +125,7 @@ export default function Events() {
                         <EyeIcon size={20} fill="#379683" />
                       </IconButton>
                     </Link>
-                    <Link className="space" href={`/event/${event.id}/edit`}>
+                    <Link className="space" href={`/event/${event.id}/update`}>
                       <IconButton>
                         <EditIcon size={20} fill="#05386b" />
                       </IconButton>
