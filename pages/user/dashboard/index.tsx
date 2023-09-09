@@ -6,6 +6,7 @@
 // events bu number of tickets (chart pie)
 import { LineChart, PieChart } from "@/components/charts";
 import { PageLayout } from "@/layouts";
+import NotFound from "@/pages/404";
 import { Typography } from "@material-ui/core";
 import { Divider, Grid } from "@mui/material";
 import Head from "next/head";
@@ -17,6 +18,9 @@ const StyledDivider = styled(Divider)`
 `;
 
 export default function Dashboard() {
+  const version = 1.0;
+  if (version === 1.0) return <NotFound />;
+  // dashboard will be available in version 2.0
   return (
     <PageLayout title="title.dashboard">
       <Head>

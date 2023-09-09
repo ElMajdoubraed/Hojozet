@@ -32,7 +32,7 @@ const StartNow = () => {
           component="h5"
           gutterBottom
         >
-          مستعد لإنشاء قائمتك الخاصة؟
+          مستعد لانشاء فعاليتك الخاصة ؟
         </Typography>
       </Grid>
       <Grid
@@ -48,7 +48,7 @@ const StartNow = () => {
         md={12}
       >
         <Button color="primary" variant="contained">
-          <Link href={"/admin/add"}>انشئ قائمتك الان</Link>
+          <Link href={"/event/create"}>انشئ فعاليتك الان</Link>
         </Button>
       </Grid>
     </Grid>

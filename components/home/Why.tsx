@@ -49,7 +49,7 @@ const WhyComponent = () => {
             color: "#666",
           }}
         >
-          حجوزات هي أفضل طريقة لإنشاء قائمة خاصة بك على الإنترنت.
+          حجوزات هي أفضل طريقة لإنشاء حجوزاتك على الإنترنت.
         </Typography>
       </Grid>
       {map(Why, (why: WhyInterface, index: number) => {

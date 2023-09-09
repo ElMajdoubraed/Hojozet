@@ -117,11 +117,14 @@ function UserMenu(user: any) {
         <Link href="/user/profile" passHref>
           <MenuItem>{currentUser?.name}</MenuItem>
         </Link>
-        <Link href="/user/dashboard" passHref>
+        {/*     <Link href="/user/dashboard" passHref>
           <MenuItem style={{ color: "black" }}>
             <FormattedMessage id="header.dashboard" />
           </MenuItem>
         </Link>
+
+           */}
+
         <Link href="/user/dashboard/tickets" passHref>
           <MenuItem style={{ color: "black" }}>
             <FormattedMessage id="header.reservations" />
