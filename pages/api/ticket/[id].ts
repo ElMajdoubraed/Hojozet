@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import auth from "@/utils/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
@@ -28,13 +26,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           include: {
             event: true,
-            user: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+              },
+            },
           },
         });
         res.status(200).json(ticket);
       } catch (error) {
         res.status(400).json({ message: "Something went wrong" });
       }
+      break;
     default:
       res.status(400).json({ message: "Something went wrong" });
       break;

@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookies from "@/utils/cookies";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {

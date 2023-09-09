@@ -1,5 +1,13 @@
+import { Container } from "@material-ui/core";
 import Head from "next/head";
-import Image from "next/image";
+import {
+  FaqHome,
+  HowHome,
+  MainHome,
+  StartNowHome,
+  UseCaseHome,
+  WhyHome,
+} from "@/components/home";
 
 export default function Home() {
   return (
@@ -10,41 +18,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <main>
-          <h1>hi</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            culpa voluptate deserunt doloremque reiciendis? Veritatis iste
-            commodi ex consectetur voluptatum voluptates labore sapiente ipsa,
-            suscipit quo maxime consequuntur neque eligendi.
-          </p>
-          <img src="/images/vercel.svg" alt="" />
-          <Image src="/images/vercel.svg" alt="" width={300} height={300} />
-        </main>
-        <main>
-          <h1>hi</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            culpa voluptate deserunt doloremque reiciendis? Veritatis iste
-            commodi ex consectetur voluptatum voluptates labore sapiente ipsa,
-            suscipit quo maxime consequuntur neque eligendi.
-          </p>
-          <img src="/images/vercel.svg" alt="" />
-          <Image src="/images/vercel.svg" alt="" width={300} height={300} />
-        </main>
-        <main>
-          <h1>hi</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            culpa voluptate deserunt doloremque reiciendis? Veritatis iste
-            commodi ex consectetur voluptatum voluptates labore sapiente ipsa,
-            suscipit quo maxime consequuntur neque eligendi.
-          </p>
-          <img src="/images/vercel.svg" alt="" />
-          <Image src="/images/vercel.svg" alt="" width={300} height={300} />
-        </main>
-      </div>
+      <Container>
+        <section id="main-section">
+          <MainHome />
+        </section>
+        <section id="how-section">
+          <HowHome />
+        </section>
+        <section id="usecase-section">
+          <UseCaseHome />
+        </section>
+        <section id="why-section">
+          <WhyHome />
+        </section>
+        <section id="faq-section">
+          <FaqHome />
+        </section>
+        <section id="start-section">
+          <StartNowHome />
+        </section>
+      </Container>
     </>
   );
 }

@@ -1,9 +1,7 @@
 import auth from "@/utils/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/utils/db";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") return res.status(400).json({});

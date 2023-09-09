@@ -24,6 +24,7 @@ export default function EventReservations() {
   const [reservations, setReservations] = useState([]) as any[];
   const [auxReservations, setAuxReservations] = useState([]) as any[];
   const [changed, setChanged] = useState(false) as any;
+  const uploadUrl = process.env.NEXT_PUBLIC_S3_UPLOAD_URL;
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
@@ -73,27 +74,6 @@ export default function EventReservations() {
       </Head>
       <PageLayout title="title.reservations">
         <Grid container sx={{ marginTop: "2rem" }}>
-          <Grid
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "4rem",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
-            <Avatar
-              style={{
-                width: "5rem",
-                height: "5rem",
-                marginBottom: "1.5rem",
-              }}
-            />
-            <Typography color="secondary">اسم الفعالية</Typography>
-          </Grid>
           <Grid className="mb-5" item xs={12}>
             <TextInput
               label="بحث"

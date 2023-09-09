@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -7,7 +7,6 @@ interface DecodedInterface {
   iat: number;
   exp: number;
 }
-const prisma = new PrismaClient();
 
 async function check(req: NextApiRequest, res: NextApiResponse) {
   const decoded: DecodedInterface = jwt.verify(

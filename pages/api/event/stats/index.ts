@@ -1,9 +1,7 @@
 // get all events for user authentificated and calculate balance and sats
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import auth from "@/utils/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "GET") return res.status(400).json({});

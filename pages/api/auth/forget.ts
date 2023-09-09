@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailSubject, EmailTemplate } from "@/constants/emails/ForgetPassword";
 import sendEmail from "@/helpers/sendEmail";
 import jwt from "jsonwebtoken";
-
-const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {

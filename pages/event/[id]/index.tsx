@@ -23,6 +23,7 @@ export default function Event() {
     redirectTo: "/auth/login",
     redirectIfFound: false,
   });
+  const uploadUrl = process.env.NEXT_PUBLIC_S3_UPLOAD_URL;
   const router = useRouter();
   const { id } = router.query;
 
@@ -100,6 +101,7 @@ export default function Event() {
             md={12}
           >
             <Avatar
+              src={uploadUrl + "/" + event?.logo}
               style={{
                 width: "5rem",
                 height: "5rem",

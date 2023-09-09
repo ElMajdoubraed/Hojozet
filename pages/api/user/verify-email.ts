@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import sendEmail from "@/helpers/sendEmail";
 import { EmailSubject, EmailTemplate } from "@/constants/emails/VerifEmail";
 import auth from "@/utils/auth";
-
-const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.user;
