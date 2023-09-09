@@ -43,7 +43,7 @@ const UseCase = () => {
         md={12}
       >
         <Typography align="center" variant="h5" component="h5" gutterBottom>
-          أنشئ قائمة الطعام الخاصة بك على الإنترنت
+          كيف يمكنك استخدام حجوزات؟
         </Typography>
         <Typography
           align="center"
@@ -54,7 +54,7 @@ const UseCase = () => {
             color: "#666",
           }}
         >
-          خصص قائمة الطعام الخاصة بك واجعلها متاحة على الإنترنت للجميع
+          يمكنك استخدام حجوزات لإدارة فعالياتك و ضبط الحجوزات عبر الإنترنت
         </Typography>
       </Grid>
       {map(UseCases, (use: UseCaseInterface, index: number) => {

@@ -2,7 +2,6 @@ import { Container } from "@material-ui/core";
 import Head from "next/head";
 import {
   FaqHome,
-  HowHome,
   MainHome,
   StartNowHome,
   UseCaseHome,
@@ -22,14 +21,11 @@ export default function Home() {
         <section id="main-section">
           <MainHome />
         </section>
-        <section id="how-section">
-          <HowHome />
+        <section id="why-section">
+          <WhyHome />
         </section>
         <section id="usecase-section">
           <UseCaseHome />
-        </section>
-        <section id="why-section">
-          <WhyHome />
         </section>
         <section id="faq-section">
           <FaqHome />

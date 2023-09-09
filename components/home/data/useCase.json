@@ -1,38 +1,38 @@
 [
   {
-    "image": "/images/home/get-orders.png",
-    "title": " أطلع على الطلبات",
-    "description": "اطلع على الطلبات الواردة و تحكم بكل طلب مع امكانية تغيير حالة الطلب.",
+    "image": "/images/home/create-event.png",
+    "title": "أنشأ فعاليتك الخاصة",
+    "description": "أنشأ فعاليتك الخاصة و استقبل حجوزاتك عن بعد.",
     "button": {
-      "title": "الطلبات الواردة",
-      "link": "/menu/1/get-orders"
+      "title": "أنشأ فعاليتك الخاصة",
+      "link": "/event/create"
     }
   },
   {
-    "image": "/images/home/add-cat.png",
-    "title": " أضف فئة جديدة",
-    "description": "أضف فئة جديدة للمنتجات الخاصة بك.",
+    "image": "/images/home/reservations.png",
+    "title": "اطلع على الحجوزات",
+    "description": "اطلع على الحجوزات الواردة و تحكم بكل حجز مع امكانية تغيير حالة الحجز.",
     "button": {
-      "title": "أضف فئة جديدة",
-      "link": "/menu/1/add-category"
+      "title": "الحجوزات الواردة",
+      "link": "/event/2/reservations"
     }
   },
   {
-    "image": "/images/home/qr.png",
-    "title": "تحميل Qr Code",
-    "description": "قم بتحميل Qr Code الخاص بك ليتمكن العملاء من مسحه و الدخول الى قائمة المنتجات الخاصة بك.",
+    "image": "/images/home/addpost.png",
+    "title": "أنشأ منشورات ",
+    "description": "أنشأ منشورات لكل فعالية لابقاء الزبائن على اطلاع بكل جديد.",
     "button": {
-      "title": "تحميل Qr Code",
-      "link": "/dashboard"
+      "title": "أنشأ منشورات",
+      "link": "/event/2/addpost"
     }
   },
   {
-    "image": "/images/home/add-item.png",
-    "title": "أضافة عنصر الى القائمة",
-    "description": "أضف عنصر جديدة للقائمة الخاصة بك.",
+    "image": "/images/home/reservation.png",
+    "title": "أحصل على حجزك الخاص",
+    "description": "أحصل على حجزك الخاص و تحكم بكل حجز.",
     "button": {
-      "title": "أضف عنصر ",
-      "link": "/menu/1/add-item"
+      "title": "أحجز الآن",
+      "link": "/event/2"
     }
   }
 ]
