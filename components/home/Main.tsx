@@ -23,21 +23,24 @@ const Main = () => {
             color: "#666",
           }}
         >
-          حجوزات هي أفضل طريقة لإنشاء قائمة خاصة بك على الإنترنت.
+          حجوزات هي أفضل طريقة لإنشاء حجوزاتك على الإنترنت.
         </Typography>
         <Button variant="contained" color="primary">
           <Link href={"/admin/dashboard"}>ابدأ الان</Link>
         </Button>
       </Grid>
-      <Grid item xs={12} sm={6} md={6}>
-        <img
-          src="/images/home/home.png"
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          alt="حجوزات"
-        />
+      <Grid
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        item
+        xs={12}
+        sm={6}
+        md={6}
+      >
+        <img src="/images/home/home.gif" alt="حجوزات" />
       </Grid>
     </Grid>
   );
