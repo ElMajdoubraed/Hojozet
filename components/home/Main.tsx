@@ -26,7 +26,7 @@ const Main = () => {
           حجوزات هي أفضل طريقة لإنشاء حجوزاتك على الإنترنت.
         </Typography>
         <Button variant="contained" color="primary">
-          <Link href={"/admin/dashboard"}>ابدأ الان</Link>
+          <Link href={"/event/create"}>ابدأ الان</Link>
         </Button>
       </Grid>
       <Grid
